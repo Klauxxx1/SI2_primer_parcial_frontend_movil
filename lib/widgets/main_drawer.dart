@@ -38,18 +38,18 @@ class MainDrawer extends StatelessWidget {
           ),
           _drawerItem(
             Icons.shopping_cart,
-            'CARRITO DE COMPRA',
+            'LISTA DE COMPRA',
             '/carrito',
             context,
           ),
-          _drawerItem(Icons.receipt, 'MIS PEDIDOS', '/pedidos', context),
+          /*_drawerItem(Icons.receipt, 'MIS PEDIDOS', '/pedidos', context),
           _drawerItem(
             Icons.receipt,
             'Modelo CRUD simple',
             '/personas',
             context,
-          ),
-          _drawerItem(Icons.receipt, 'test', '/voice_test', context),
+          ),*/
+          //_drawerItem(Icons.receipt, 'test', '/voice_test', context),
         ],
       ),
     );

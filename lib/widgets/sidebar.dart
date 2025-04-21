@@ -34,26 +34,6 @@ class SideBar extends StatelessWidget {
               ); // Ruta definida
             },
           ),
-          /*ExpansionTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Opciones'),
-            children: [
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text('Opción 1'),
-                onTap: () {
-                  // Reemplazar con la ruta correspondiente
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text('Opción 2'),
-                onTap: () {
-                  // Reemplazar con la ruta correspondiente
-                },
-              ),
-            ],
-          ),*/
           ListTile(
             leading: const Icon(Icons.shopping_bag),
             title: const Text('CATÁLOGO DE PRODUCTOS'),
@@ -63,18 +43,11 @@ class SideBar extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.shopping_cart),
-            title: const Text('CARRITO DE COMPRA'),
+            title: const Text('LISTA DE COMPRA'),
             onTap: () {
               Navigator.pushNamed(context, '/carrito');
             },
           ),
-          /*ListTile(
-            leading: Icon(Icons.folder),
-            title: Text('CATÁLOGO DE PRODUCTOS'),
-            onTap: () {
-              Navigator.pushNamed(context, '/catalogo');
-            },
-          ),*/
         ],
       ),
     );

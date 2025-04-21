@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 //import 'routes.dart';
 import 'providers/cart_provider.dart';
-import 'widgets/global_overlay.dart'; // ⬅️ ahora desde widgets/
+import 'widgets/global_overlay.dart';
 
 void main() {
   runApp(
