@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_movil/providers/carrito_provider.dart';
-import 'package:frontend_movil/views/home/principal_content.dart';
+//import 'package:frontend_movil/views/home/principal_content.dart';
 import 'package:provider/provider.dart';
 
 //import 'routes.dart';
