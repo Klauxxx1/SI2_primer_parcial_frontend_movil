@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_movil/models/user_model.dart';
+import 'package:frontend_movil/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 import '../../services/auth_service.dart';
 
 class LoginView extends StatefulWidget {
@@ -35,12 +38,19 @@ class _LoginViewState extends State<LoginView> {
     });
 
     try {
-      await _authService.login(
+      // devuelva el usuario
+      final user = await _authService.login(
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
 
       if (mounted) {
+        //almacena el usuario del provider
+        /*Persistencia durante la sesión: Mantiene el ID del usuario 
+        disponible mientras la app está abierta, sin tener que pasar 
+        este dato entre pantallas*/
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(user as User);
         Navigator.pushReplacementNamed(context, '/');
       }
     } catch (e) {
