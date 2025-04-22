@@ -167,7 +167,7 @@ class _LoginViewState extends State<LoginView> {
                               if (value == null || value.isEmpty) {
                                 return 'Por favor ingrese su contraseña';
                               }
-                              if (value.length < 4) {
+                              if (value.length < 3) {
                                 return 'La contraseña debe tener al menos 4 caracteres';
                               }
                               return null;

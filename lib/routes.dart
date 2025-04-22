@@ -7,6 +7,7 @@ import 'package:frontend_movil/views/carrito/lista_carritos_view.dart';
 import 'package:frontend_movil/views/catalogo/catalogo_productos_view.dart';
 import 'package:frontend_movil/views/home/main_page.dart';
 import 'package:frontend_movil/views/persona/persona_view.dart';
+import 'package:frontend_movil/views/recomendaciones_view.dart';
 
 final Map<String, WidgetBuilder> appRoutes = {
   '/': (context) => MainPage(),
@@ -32,4 +33,5 @@ final Map<String, WidgetBuilder> appRoutes = {
   '/login': (context) => const LoginView(),
   '/register': (context) => const RegisterView(),
   '/compra': (context) => const CompraView(),
+    '/recomendaciones': (context) => const RecomendacionesView(),
 };

@@ -6,7 +6,7 @@ import 'package:frontend_movil/providers/carrito_provider.dart';
 import 'package:frontend_movil/providers/producto.dart';
 //import '../models/producto_model.dart';
 import '../models/carrito_compra_model.dart';
-//import '../models/carrito_detalle_model.dart';
+import '../models/carrito_detalle_model.dart';
 import '../services/producto_service.dart';
 import '../services/carrito_compra_service.dart';
 import '../services/carrito_detalle_service.dart';
@@ -147,15 +147,14 @@ class VoiceCommandService {
     // Si deseas sincronizar con el backend
     if (provider.selectedCartId != null) {
       try {
-        // Crear el detalle en la API
-        // await CarritoDetalleService().crearDetalle(
-        //   CarritoDetalle(
-        //     carritoId: provider.selectedCartId!,
-        //     productoId: productoM.id,
-        //     cantidad: quantity,
-        //     precioUnitario: double.parse(productoM.precio),
-        //   ),
-        // );
+ await CarritoDetalleService().crearDetalle(
+        CarritoDetalle(
+          carritoId: provider.selectedCartId!,
+          productoId: productoM.id,
+          cantidad: quantity,
+          precioUnitario: double.parse(productoM.precio),
+        ),
+      );
       } catch (e) {
         // Si falla la sincronización, mostrar advertencia pero mantener el producto en el carrito local
         _showFeedback(

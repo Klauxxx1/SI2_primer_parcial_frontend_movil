@@ -31,6 +31,12 @@ class MainDrawer extends StatelessWidget {
             context,
           ),
           _drawerItem(
+            Icons.shopping_basket,
+            'PRODUCTOS RECOMENDADOS',
+            '/recomendaciones',
+            context,
+          ),
+          _drawerItem(
             Icons.discount,
             'DESCUENTOS DE TEMPORADA',
             '/descuentos',
