@@ -69,6 +69,7 @@ class Producto {
       return resultado;
     }
 
+    // ignore: avoid_print
     print('[WARNING] Tipo no reconocido, intentando conversión genérica');
     final resultado = double.tryParse(precio.toString()) ?? 0.0;
     print('[DEBUG] Resultado conversión genérica: $resultado');

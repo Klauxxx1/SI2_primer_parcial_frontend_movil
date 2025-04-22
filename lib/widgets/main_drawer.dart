@@ -38,7 +38,7 @@ class MainDrawer extends StatelessWidget {
           ),
           _drawerItem(
             Icons.shopping_cart,
-            'CARRITO DE COMPRA',
+            'LISTA DE COMPRAS',
             '/carrito_detalle',
             context,
           ),

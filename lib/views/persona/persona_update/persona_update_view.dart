@@ -3,7 +3,7 @@ import '../../../models/persona_model.dart';
 import '../../../services/persona_service.dart';
 
 class PersonaUpdateView extends StatefulWidget {
-  final Persona persona;  // Recibe la persona a editar
+  final Persona persona; // Recibe la persona a editar
 
   const PersonaUpdateView({super.key, required this.persona});
 
@@ -36,11 +36,18 @@ class _PersonaUpdateViewState extends State<PersonaUpdateView> {
       final nombre = _nombreController.text;
       final edad = int.tryParse(_edadController.text) ?? 0;
 
-      final personaActualizada = Persona(id: widget.persona.id, nombre: nombre, edad: edad);
+      final personaActualizada = Persona(
+        id: widget.persona.id,
+        nombre: nombre,
+        edad: edad,
+      );
 
       try {
         // Llamar al servicio para actualizar la persona
-        await PersonaService().actualizarPersona(widget.persona.id!, personaActualizada);
+        await PersonaService().actualizarPersona(
+          widget.persona.id!,
+          personaActualizada,
+        );
         // Si la actualización es exitosa, navegar hacia atrás
         Navigator.pop(context);
       } catch (e) {
@@ -70,9 +77,7 @@ class _PersonaUpdateViewState extends State<PersonaUpdateView> {
               TextFormField(
                 controller: _nombreController,
                 textCapitalization: TextCapitalization.sentences,
-                decoration: const InputDecoration(
-                  labelText: 'Nombre',
-                ),
+                decoration: const InputDecoration(labelText: 'Nombre'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor ingrese el nombre';
@@ -83,9 +88,7 @@ class _PersonaUpdateViewState extends State<PersonaUpdateView> {
               TextFormField(
                 controller: _edadController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Edad',
-                ),
+                decoration: const InputDecoration(labelText: 'Edad'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor ingrese la edad';
@@ -101,9 +104,9 @@ class _PersonaUpdateViewState extends State<PersonaUpdateView> {
               _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton(
-                      onPressed: _actualizarPersona,
-                      child: const Text('Actualizar'),
-                    ),
+                    onPressed: _actualizarPersona,
+                    child: const Text('Actualizar'),
+                  ),
             ],
           ),
         ),

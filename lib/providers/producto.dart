@@ -21,6 +21,7 @@ class ProductoM {
     required this.descripcion,
     required this.precio,
     required this.categoria,
+    required String urlImagen,
   });
 
   factory ProductoM.fromJson(Map<String, dynamic> json) => ProductoM(
@@ -29,6 +30,7 @@ class ProductoM {
     descripcion: json["descripcion"],
     precio: json["precio"],
     categoria: json["categoria"],
+    urlImagen: '',
   );
 
   Map<String, dynamic> toJson() => {

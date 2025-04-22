@@ -9,7 +9,7 @@ class DetalleCarritoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Obtener el ID del carrito del provider
-    final cartProvider = Provider.of<CartProvider>(context);
+    Provider.of<CartProvider>(context);
     final carritoProvider = Provider.of<CarritoProvider>(context);
 
     return Scaffold(
@@ -116,7 +116,7 @@ class DetalleCarritoView extends StatelessWidget {
                       child: const Icon(Icons.delete, color: Colors.white),
                     ),
                     onDismissed: (_) {
-                      carritoProvider.eliminarProducto(item.producto.id!);
+                      carritoProvider.eliminarProducto(item.producto.id);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text("${item.producto.nombre} eliminado"),
@@ -149,7 +149,7 @@ class DetalleCarritoView extends StatelessWidget {
                               icon: const Icon(Icons.remove_circle_outline),
                               onPressed:
                                   () => carritoProvider.decrementarCantidad(
-                                    item.producto.id!,
+                                    item.producto.id,
                                   ),
                             ),
                             Text(
@@ -163,7 +163,7 @@ class DetalleCarritoView extends StatelessWidget {
                               icon: const Icon(Icons.add_circle_outline),
                               onPressed:
                                   () => carritoProvider.incrementarCantidad(
-                                    item.producto.id!,
+                                    item.producto.id,
                                   ),
                             ),
                             const SizedBox(width: 16),

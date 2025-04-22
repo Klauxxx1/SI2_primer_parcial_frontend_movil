@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import '../../widgets/main_drawer.dart'; // Asegurate de tener este archivo
 import '../../services/persona_service.dart';
@@ -23,7 +25,9 @@ class _PersonaViewState extends State<PersonaView> {
   void initState() {
     super.initState();
     _cargarPersonas();
-    _searchController.addListener(() => _filtrarPersonas(_searchController.text));
+    _searchController.addListener(
+      () => _filtrarPersonas(_searchController.text),
+    );
   }
 
   Future<void> _cargarPersonas() async {
@@ -43,26 +47,30 @@ class _PersonaViewState extends State<PersonaView> {
   Future<void> _confirmarEliminarPersona(int? id) async {
     final bool? confirmar = await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Confirmar eliminacion'),
-        content: const Text('¿Seguro que deseas eliminar esta persona?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancelar'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Confirmar eliminacion'),
+            content: const Text('¿Seguro que deseas eliminar esta persona?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  await _personaService.eliminarPersona(id!);
+                  if (mounted) {
+                    Navigator.pop(context, true);
+                    _cargarPersonas();
+                  }
+                },
+                child: const Text(
+                  'Eliminar',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () async {
-              await _personaService.eliminarPersona(id!);
-              if (mounted) {
-                Navigator.pop(context, true);
-                _cargarPersonas();
-              }
-            },
-            child: const Text('Eliminar', style: TextStyle(color: Colors.red)),
-          ),
-        ],
-      ),
     );
 
     if (confirmar == true) {
@@ -82,18 +90,22 @@ class _PersonaViewState extends State<PersonaView> {
         appBar: AppBar(
           title: const Text("Personas"),
           leading: Builder(
-            builder: (context) => IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
+            builder:
+                (context) => IconButton(
+                  icon: const Icon(Icons.menu),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                ),
           ),
         ),
         drawer: MainDrawer(),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const PersonaCreateView()),
-          ).then((_) => _cargarPersonas()),
+          onPressed:
+              () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const PersonaCreateView(),
+                ),
+              ).then((_) => _cargarPersonas()),
           child: const Icon(Icons.add),
         ),
         body: Column(
@@ -116,41 +128,59 @@ class _PersonaViewState extends State<PersonaView> {
               ),
             ),
             Expanded(
-              child: personasFiltradas.isEmpty
-                  ? const Center(child: Text('No hay personas disponibles.'))
-                  : ListView.builder(
-                      itemCount: personasFiltradas.length,
-                      itemBuilder: (context, index) {
-                        final persona = personasFiltradas[index];
-                        return Card(
-                          margin: const EdgeInsets.all(10.0),
-                          elevation: 5.0,
-                          child: ListTile(
-                            title: Text(persona.nombre),
-                            subtitle: Text('Edad: ${persona.edad}'),
-                            leading: CircleAvatar(child: Text(persona.id.toString())),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.edit, color: Colors.blue),
-                                  onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PersonaUpdateView(persona: persona),
+              child:
+                  personasFiltradas.isEmpty
+                      ? const Center(
+                        child: Text('No hay personas disponibles.'),
+                      )
+                      : ListView.builder(
+                        itemCount: personasFiltradas.length,
+                        itemBuilder: (context, index) {
+                          final persona = personasFiltradas[index];
+                          return Card(
+                            margin: const EdgeInsets.all(10.0),
+                            elevation: 5.0,
+                            child: ListTile(
+                              title: Text(persona.nombre),
+                              subtitle: Text('Edad: ${persona.edad}'),
+                              leading: CircleAvatar(
+                                child: Text(persona.id.toString()),
+                              ),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.blue,
                                     ),
-                                  ).then((_) => _cargarPersonas()),
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.delete, color: Colors.red),
-                                  onPressed: () => _confirmarEliminarPersona(persona.id),
-                                ),
-                              ],
+                                    onPressed:
+                                        () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder:
+                                                (context) => PersonaUpdateView(
+                                                  persona: persona,
+                                                ),
+                                          ),
+                                        ).then((_) => _cargarPersonas()),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed:
+                                        () => _confirmarEliminarPersona(
+                                          persona.id,
+                                        ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    ),
+                          );
+                        },
+                      ),
             ),
           ],
         ),

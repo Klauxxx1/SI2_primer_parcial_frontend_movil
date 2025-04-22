@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../providers/carrito_provider.dart';
@@ -257,12 +259,12 @@ class _CompraViewState extends State<CompraView> {
             const Divider(height: 4),
 
             // Método: Tarjeta
-            _buildMetodoPagoTile(
+            /*_buildMetodoPagoTile(
               'tarjeta',
               'Tarjeta de crédito/débito',
               Icons.credit_card,
               Colors.blue,
-            ),
+            ),*/
             const Divider(height: 4),
 
             // Método: PayPal
@@ -318,8 +320,8 @@ class _CompraViewState extends State<CompraView> {
   Widget _buildDetallesMetodoPago() {
     // Mostrar detalles específicos según el método de pago seleccionado
     switch (_metodoPagoSeleccionado) {
-      case 'tarjeta':
-        return _buildFormularioTarjeta();
+      //case 'tarjeta':
+      //return _buildFormularioTarjeta();
       case 'paypal':
         return _buildPayPalInfo();
       case 'transferencia':
@@ -328,102 +330,6 @@ class _CompraViewState extends State<CompraView> {
       default:
         return _buildEfectivoInfo();
     }
-  }
-
-  Widget _buildFormularioTarjeta() {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Datos de la tarjeta',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            TextFormField(
-              controller: _numeroTarjetaController,
-              decoration: InputDecoration(
-                labelText: 'Número de tarjeta',
-                prefixIcon: const Icon(Icons.credit_card),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              keyboardType: TextInputType.number,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Por favor ingresa el número de tarjeta';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: TextFormField(
-                    controller: _fechaExpiracionController,
-                    decoration: InputDecoration(
-                      labelText: 'MM/YY',
-                      prefixIcon: const Icon(Icons.date_range),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    keyboardType: TextInputType.datetime,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Fecha inválida';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  flex: 1,
-                  child: TextFormField(
-                    controller: _cvvController,
-                    decoration: InputDecoration(
-                      labelText: 'CVV',
-                      prefixIcon: const Icon(Icons.security),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Requerido';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.lock, size: 16, color: Colors.grey),
-                SizedBox(width: 8),
-                Text(
-                  'Conexión segura para proteger tus datos',
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   Widget _buildPayPalInfo() {
@@ -536,7 +442,7 @@ class _CompraViewState extends State<CompraView> {
             ),
             const SizedBox(height: 16),
             const Text(
-              'Una vez realizada la transferencia, por favor envía el comprobante a nuestro WhatsApp: +591 12345678',
+              'Una vez realizada la transferencia, por favor envía el comprobante a nuestro WhatsApp: +591 75044234',
               style: TextStyle(fontSize: 14),
             ),
           ],

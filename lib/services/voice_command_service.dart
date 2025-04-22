@@ -1,4 +1,6 @@
 //import 'package:speech_to_text/speech_to_text.dart' as stt;
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:frontend_movil/providers/carrito_provider.dart';
 import 'package:frontend_movil/providers/producto.dart';
@@ -131,7 +133,8 @@ class VoiceCommandService {
       nombre: product.nombre,
       descripcion: product.descripcion ?? '',
       precio: product.precio.toString(),
-      categoria: product.categoriaId ?? 1,
+      categoria: product.categoriaId,
+      urlImagen: '', /////// ?? 1;
     );
 
     // Agregar el producto al carrito local

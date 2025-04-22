@@ -52,4 +52,24 @@ class ProductoService {
       throw Exception('Error al eliminar el producto');
     }
   }
+
+  Future<List<Producto>> obtenerProductosPorCategoria(int categoriaId) async {
+    final response = await http.get(
+      Uri.parse('${Config.baseUrl}/productos/categoria/$categoriaId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      List<dynamic> body = json.decode(response.body);
+      return body.map((item) => Producto.fromJson(item)).toList();
+    } else {
+      // Si el endpoint específico no existe, filtramos localmente
+      final todosLosProductos = await obtenerProductos();
+      return todosLosProductos
+          .where((p) => p.categoriaId == categoriaId)
+          .toList();
+    }
+  }
 }
